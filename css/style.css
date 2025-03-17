@@ -1,0 +1,329 @@
+/* 
+ * Main Stylesheet for Personal Website
+ * 
+ * This CSS file handles the styling for:
+ * 1. The dynamic video background carousel
+ * 2. The foreground content card
+ * 3. Responsive design for various screen sizes
+ */
+
+/* ---------- Base Styles & Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+    height: 300vh; /* Make the page scrollable */
+}
+
+h1, h2, h3 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #004080;
+}
+
+/* ---------- Video Background Carousel ---------- */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: white;
+    overflow: hidden;
+}
+
+/* Row container for videos in the carousel */
+.video-row {
+    display: flex;
+    height: 200px; /* Consistent height for rows */
+    margin-bottom: 10px; /* Space between rows */
+    position: relative;
+    white-space: nowrap;
+}
+
+/* Animation for rows moving left */
+.video-row.scroll-left {
+    animation: scrollLeft 120s linear infinite;
+}
+
+/* Animation for rows moving right */
+.video-row.scroll-right {
+    animation: scrollRight 120s linear infinite;
+}
+
+@keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes scrollRight {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
+
+/* Video elements inside the carousel */
+.video-item {
+    height: 200px; /* Consistent height */
+    width: 300px; /* Base width, will be adjusted based on aspect ratio */
+    min-width: 250px;
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 10px; /* Space between videos */
+}
+
+/* ---------- Content Card ---------- */
+.content-card {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 90%;
+    max-width: 800px;
+    margin: 20vh auto;
+    padding: 2rem;
+    opacity: 0; /* Start completely hidden */
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none; /* Disable interactions while hidden */
+}
+
+/* Content card visible state - added by JS on scroll */
+.content-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* Enable interactions when visible */
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.card-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* ---------- Section Styling ---------- */
+section {
+    margin-bottom: 2.5rem;
+}
+
+section h2 {
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+section h2:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0066cc;
+}
+
+/* ---------- Blog Section ---------- */
+.blog-posts {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.blog-post {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.post-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* ---------- Links Section ---------- */
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: relative;
+}
+
+.social-link {
+    padding: 0.5rem 1rem;
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* Hidden X.com link styling */
+.hidden-link-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.hidden-link {
+    opacity: 0;
+    pointer-events: auto;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: -10px;
+}
+
+.hidden-link:hover {
+    background-color: transparent;
+    transform: none;
+}
+
+.invisible-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---------- Dynamic Links Section ---------- */
+.dynamic-links {
+    margin-top: 1rem;
+}
+
+.dynamic-links h3 {
+    margin: 1.25rem 0 0.75rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.dynamic-links ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+
+.dynamic-links li {
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid #eee;
+    transition: border-color 0.3s ease;
+}
+
+.dynamic-links li:hover {
+    border-left-color: #0066cc;
+}
+
+.dynamic-links a {
+    display: block;
+    text-decoration: none;
+    color: #0066cc;
+    transition: color 0.3s ease;
+}
+
+.dynamic-links a:hover {
+    color: #004080;
+}
+
+.dynamic-links .link-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+.loading-text {
+    color: #999;
+    font-style: italic;
+}
+
+/* ---------- Footer ---------- */
+.card-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+    .content-card {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 15vh auto;
+    }
+    
+    .card-header h1 {
+        font-size: 2rem;
+    }
+    
+    .archive-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-card {
+        padding: 1rem;
+        margin: 10vh auto;
+    }
+    
+    .card-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .social-links {
+        flex-direction: column;
+    }
+}

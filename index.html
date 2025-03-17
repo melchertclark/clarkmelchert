@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clark Melchert</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons (using latest version for X.com icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Meta tags for SEO and sharing -->
+    <meta name="description" content="Clark Melchert's personal website featuring a dynamic video background">
+    <meta property="og:title" content="Clark Melchert">
+    <meta property="og:description" content="Clark Melchert's personal website featuring a dynamic video background and content sections">
+</head>
+<body>
+    <!-- Video Background Carousel Container -->
+    <div class="video-background" id="videoBackground">
+        <!-- Videos will be dynamically added by JavaScript -->
+    </div>
+
+    <!-- Content Card That Appears on Scroll -->
+    <div class="content-card" id="contentCard">
+        <header class="card-header">
+            <h1>Clark Melchert</h1>
+            <p class="tagline">Here's where you find my stuff online</p>
+        </header>
+
+        <!-- Social Links Section -->
+        <section class="links-section">
+            <h2>Connect</h2>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/clarkmelchert/" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="mailto:clark.melchert@gmail.com" class="social-link"><i class="fas fa-envelope"></i> Email</a>
+                <div class="hidden-link-container">
+                    <a href="https://x.com/biteydoginsider" class="social-link hidden-link" aria-label="Hidden Link"><span class="invisible-text">X.com</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Links Section from Markdown File -->
+        <section class="dynamic-links-section">
+            <h2>My Links</h2>
+            <div id="dynamicLinks" class="dynamic-links">
+                <!-- Will be populated from links.md via JavaScript -->
+                <p class="loading-text">Loading links...</p>
+            </div>
+        </section>
+
+        <footer class="card-footer">
+            <p>&copy; 2024 Clark Melchert. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript for dynamic functionality -->
+    <script src="js/main.js"></script>
+</body>
+</html>

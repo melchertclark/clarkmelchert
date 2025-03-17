@@ -1,0 +1,79 @@
+## Product Requirements Document (PRD)
+
+### Product Overview
+
+This document outlines the requirements for a personal website featuring a dynamic, visually engaging background composed of user videos, along with foreground content designed for a blog, external links, and archived writings. The website is designed primarily as a portfolio and personal content hub.
+
+### User Story
+
+As the website owner, I want to showcase myself through a visually appealing dynamic carousel of personal videos on my homepage background, enhancing my personal brand and identity. Additionally, I need a blog and structured space to archive and display various writings, projects, and links to external platforms.
+
+### Functional Requirements
+
+- **Dynamic Background Carousel**
+
+  - Infinite, looping carousel of videos.
+  - Grid layout, flexible to accommodate various video orientations (landscape and vertical).
+  - Uniform video heights, with widths adjusted proportionally.
+  - Consistent and deliberate white space between videos for a clean yet intentionally congested layout.
+  - Background should be white for visual clarity.
+  - Videos autoplay, muted, and looping continuously.
+
+- **Foreground Content Card**
+
+  - Floating, scroll-triggered appearance.
+  - White or slightly off-white background.
+  - Minimal translucency, providing subtle visibility of the video carousel edges.
+  - Smooth transitions upon scrolling interactions.
+  - Primary content includes:
+    - Blog section
+    - External links (social media, publications, projects)
+    - Archiving section to aggregate writings
+
+### Styling and Design Specifications
+
+- **General Appearance**
+
+  - Clean, minimalistic aesthetic.
+  - Light, airy visual feel.
+
+- **Carousel Styling**
+
+  - White background.
+  - Equal spacing (white space) between videos horizontally and vertically.
+  - Congested video alignment for visual interest.
+  - Videos displayed at a consistent height, variable width.
+  - Blurred or softened playback option to enhance foreground readability.
+
+- **Content Card Styling**
+
+  - Rounded corners and subtle box-shadow for depth.
+  - Central alignment with generous margins.
+  - Comfortable readability (good contrast, legible fonts).
+
+### Technical and Implementation Constraints
+
+- **Local Development**
+
+  - Developed using HTML, CSS, and JavaScript (optionally React/Vue/Svelte).
+  - Lightweight development workflow without build complexity preferred.
+  - Testing done via VS Code Live Server or Python HTTP server locally.
+
+- **Deployment and Hosting Strategy**
+
+  - Deployed using GitHub Pages for zero cost and simplicity.
+  - Domain hosting configured via Namecheap domain pointing through CNAME records.
+  - No server-side scripts or databases; fully static website.
+
+###
+
+### Go-To-Market Strategy
+
+- Rapid prototype developed and iteratively refined locally.
+- Immediate deployment to GitHub Pages to validate public accessibility.
+- Continuous refinement based on personal use and feedback.
+
+---
+
+This PRD summarizes the core requirements clearly for use by a developer or coding agent to build and deploy the personal website efficiently and effectively.
+
