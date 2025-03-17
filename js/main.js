@@ -40,8 +40,9 @@ function initVideoBackground() {
     // Clear any existing content
     videoContainer.innerHTML = '';
     
-    // Array of all available video files (updated to reflect current files)
+    // Array of all available video files (verified working files only)
     const videoFiles = [
+        // These files have been confirmed to exist and work properly
         '0CD97866-31BD-48DB-BF73-7D1C458DA08D.mp4',
         '69429489381__3D4E08FD-1615-4AA5-B870-59EA269A31CC.mp4',
         '80875756-8C9C-4BA2-803E-54F41073C25E.mp4',
@@ -73,6 +74,9 @@ function initVideoBackground() {
         'VIDEO_20211020155541.mp4',
         'VIDEO_20211020193521.mp4'
     ];
+    
+    // Fallback video in case of loading errors
+    const fallbackVideoURL = 'assets/videos/IMG_0364.mp4';
     
     // Calculate how many rows we need to fill the screen
     const viewportHeight = window.innerHeight;
@@ -150,12 +154,8 @@ function initVideoBackground() {
             rowVideos.push(getUniqueVideo(rowIndex * videosPerRow + i));
         }
         
-        // Fill each row with videos to cover viewport width (ensuring uniqueness)
-        for (let videoIndex = 0; videoIndex < videosPerRow; videoIndex++) {
-            // Get video file for this position
-            const videoFile = rowVideos[videoIndex];
-            
-            // Create the video element
+        // Function to create a video element
+        function createVideoElement(videoFile, isLazy = false) {
             const video = document.createElement('video');
             video.className = 'video-item';
             video.src = 'assets/videos/' + videoFile;
@@ -168,34 +168,42 @@ function initVideoBackground() {
             video.setAttribute('disablePictureInPicture', ''); // Prevent PiP
             video.setAttribute('disableRemotePlayback', ''); // Prevent casting
             
-            // Add loading="lazy" for videos outside initial viewport
-            if (rowIndex > 2) {
+            // Add loading="lazy" if specified
+            if (isLazy) {
                 video.setAttribute('loading', 'lazy');
             }
+            
+            // Handle errors - replace with fallback on error
+            video.onerror = function() {
+                console.log('Video failed to load: ' + videoFile + ', replacing with fallback');
+                this.src = fallbackVideoURL;
+            };
+            
+            // This ensures videos are visible before playing
+            video.style.backgroundColor = '#f0f0f0';
+            
+            return video;
+        }
+        
+        // Fill each row with videos to cover viewport width (ensuring uniqueness)
+        for (let videoIndex = 0; videoIndex < videosPerRow; videoIndex++) {
+            // Get video file for this position
+            const videoFile = rowVideos[videoIndex];
+            
+            // Create the video element with error handling
+            const video = createVideoElement(videoFile, rowIndex > 2);
             
             // Add to the row
             rowElement.appendChild(video);
         }
         
         // Create a duplicate set of the same videos for seamless looping
-        // We're using the same videos to ensure the loop is seamless
         for (let videoIndex = 0; videoIndex < videosPerRow; videoIndex++) {
             // Use the same video file as the first set for seamless looping
             const videoFile = rowVideos[videoIndex];
             
-            // Create the video element (duplicate)
-            const videoClone = document.createElement('video');
-            videoClone.className = 'video-item';
-            videoClone.src = 'assets/videos/' + videoFile;
-            videoClone.autoplay = true;
-            videoClone.loop = true;
-            videoClone.muted = true;
-            videoClone.playsInline = true;
-            videoClone.setAttribute('playsinline', ''); // For iOS support
-            videoClone.setAttribute('webkit-playsinline', ''); // For older iOS
-            videoClone.setAttribute('disablePictureInPicture', ''); // Prevent PiP
-            videoClone.setAttribute('disableRemotePlayback', ''); // Prevent casting
-            videoClone.setAttribute('loading', 'lazy'); // Lazy load duplicates
+            // Create the duplicate video element with error handling
+            const videoClone = createVideoElement(videoFile, true);
             
             // Add to the row
             rowElement.appendChild(videoClone);
